@@ -5,14 +5,14 @@ import tensorflow as tf
 from io import BytesIO
 import numpy as np
 
-model = tf.keras.models.load_model('./weights.h5')
+model = tf.keras.models.load_model('../Weights/001.h5')
 class_names = ['Early Blight','Late Blight','Healthy']
 
 origins = ["http://localhost:3000"]
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # Adjust this to the domain of your React app
+    allow_origins=origins,  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -56,5 +56,6 @@ async def process_image(file: UploadFile = File(...)):
     except Exception as error:
         return {"error": str(error)}
     
-
+# to host locally in cmd try to run command
+# uvicorn index:app --reload
 
